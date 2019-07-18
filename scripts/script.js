@@ -102,7 +102,8 @@ class CreatePopupFromJSON {
             "color": "white",
             "font-weight": "600",
             "cursor": "pointer",
-            "width": "100%"
+            "width": "100%",
+            "margin": "0px !important"
         };
         this.optionClass = "popup-selector-option";
         this.optionStyle = {
@@ -152,7 +153,7 @@ class CreatePopupFromJSON {
                 "background-color": "#383838"
             },
             "hoverOff": {
-                "background-color": "#333333"
+                "background-color": "transparent"
             }
         };
         this.oddRowStyle = {
