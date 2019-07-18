@@ -102,8 +102,8 @@ class CreatePopupFromJSON {
             "color": "white",
             "font-weight": "600",
             "cursor": "pointer",
-            "width": "99%",
-            "margin": "0px !important"
+            "width": "100%",
+            "margin": "0px"
         };
         this.optionClass = "popup-selector-option";
         this.optionStyle = {
