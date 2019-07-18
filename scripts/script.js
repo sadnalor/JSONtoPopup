@@ -105,6 +105,7 @@ class CreatePopupFromJSON {
             "width": "99%",
             "margin": "0px !important"
         };
+        console.log(this.selectorStyle);
         this.optionClass = "popup-selector-option";
         this.optionStyle = {
             "background": "rgba(0, 0, 0, 0.0)",
