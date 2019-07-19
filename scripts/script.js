@@ -607,7 +607,7 @@ class CreatePopupFromJSON {
             rowId = this.rowClass + '-' + i.toString();
             rowsHtml += '<tr class = "' + this.rowClass + '" id = "' + rowId + '">';
             for (var j in page[i]) {
-                tdId = this.tdClass + '-' + i.toString() + '---' + j.toString().replace(" ", "--");
+                tdId = this.tdClass + '-' + i.toString() + '---' + j.toString().replace(/\s/g, "--");
                 tdHtml += '<td class = "' + this.tdClass + '" id = "' + tdId + '" contenteditable = "' + page[i][j].editable + '" style = "' + page[i][j].style + '" data-id = "' + page[i][j].uuid + '" spellcheck="false">' + page[i][j].value + '</td>';
             }
             rowsHtml += tdHtml + '</tr>';
@@ -915,7 +915,7 @@ class CreatePopupFromJSON {
                 type = "n/a"
             }
             data.push({
-                "First Name": {
+                "First Name aaa": {
                     "value": "First Name " + i, 
                     "style": "color:red", 
                     "editable": true,
@@ -1039,7 +1039,7 @@ class CreatePopupFromJSON {
         $(document).on('blur', "td." + this.tdClass, function() {
             var id = $(this).attr('id'),
                 uuid = $(this).attr('data-id'),
-                colName = id.split('---')[1].replace("--", " "),
+                colName = id.split('---')[1].replace(/--/g, " "),
                 dataEntered = $("#" + id).html();
             if (dataEntered) {
                 self.update_data(colName, uuid, dataEntered);
