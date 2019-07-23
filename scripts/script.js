@@ -16,10 +16,9 @@ class CreatePopupFromJSON {
         this.containerStyle = {
             "width": "100%",
             "height": "100%",
-            "background": this.translucentBlack,
-            "border-radius": "10px",
-            "font-family": '"Helvetica Neue",Helvetica,Arial,sans-serif',
-            "padding": "0px 10px 10px 10px"
+            "padding": "0px 10px 10px 10px",
+            "box-sizing": "border-box",
+            "overflow-y": "scroll"
         };
         this.titleBarId = "popup-title-bar";
         this.titleBarStyle = {
@@ -52,6 +51,7 @@ class CreatePopupFromJSON {
             "width": "100%",
             "border": "3px solid #474747",
             "padding": "15px",
+            "margin": "0px",
             "height": "20px",
             "border-radius": "5px",
             "outline": "none",
@@ -157,12 +157,11 @@ class CreatePopupFromJSON {
             }
         };
         this.oddRowStyle = {
-            "background-color": "#222222",
             "hoverOn": {
-                "background-color": "#181818"
+                "background": "rgba(0, 0, 0, 0.5)"
             },
             "hoverOff": {
-                "background-color": "#222222"
+                "background": "rgba(0, 0, 0, 0)"
             }
         };
         
@@ -436,8 +435,7 @@ class CreatePopupFromJSON {
         }
         $(this.targetDiv).html("");
         $(this.targetDiv).append('<div id = "' + this.containerId + '"></div>');
-        this.containerId = "#" + this.containerId;
-        this.style(this.containerId, this.containerStyle);
+        this.style("#" + this.containerId, this.containerStyle);
     }
     
     add_title_bar(title, titleBarId, titleBarStyle) {
@@ -450,7 +448,7 @@ class CreatePopupFromJSON {
         if (titleBarStyle) {
             this.titleBarStyle = titleBarStyle;
         }
-        $(this.containerId).append('<div id = "' + this.titleBarId + '">' + this.title + '</div>');
+        $("#" + this.containerId).append('<div id = "' + this.titleBarId + '">' + this.title + '</div>');
         this.style("#" + this.titleBarId, this.titleBarStyle);
     }
 
@@ -461,7 +459,7 @@ class CreatePopupFromJSON {
         if (toolbarStyle) {
             this.toolbarStyle = toolbarStyle;
         }
-        $(this.containerId).append('<div id = "' + this.toolbarId + '"></div>');
+        $("#" + this.containerId).append('<div id = "' + this.toolbarId + '"></div>');
         this.style("#" + this.toolbarId, this.toolbarStyle);
     }
     
@@ -581,9 +579,8 @@ class CreatePopupFromJSON {
         if (tdStyle) {
             this.tdStyle = tdStyle;
         }
-        $(this.containerId).append('<div id = "' + this.tableDivId + '"></div>');
-        this.tableDivId = "#" + this.tableDivId;
-        this.style(this.tableDivId, this.tableDivStyle);
+        $("#" + this.containerId).append('<div id = "' + this.tableDivId + '"></div>');
+        this.style("#" + this.tableDivId, this.tableDivStyle);
         this.open_page(this.currentPage);
     }
     
@@ -613,7 +610,7 @@ class CreatePopupFromJSON {
             rowsHtml += tdHtml + '</tr>';
             tdHtml = '';
         }
-        $(this.tableDivId).html('<table id = "' + this.tableId + '"><colgroup id = "' + this.colgroupId + '">' + colsHtml + '</colgroup><tr id = "' + this.headerRowId + '">' + headersHtml + '</tr>' + rowsHtml + '</table></div>');
+        $("#" + this.tableDivId).html('<table id = "' + this.tableId + '"><colgroup id = "' + this.colgroupId + '">' + colsHtml + '</colgroup><tr id = "' + this.headerRowId + '">' + headersHtml + '</tr>' + rowsHtml + '</table></div>');
         for (var i in this.headerWidths) {
             this.style("#" + this.colClass + '-' + i.toString(), {"width": this.headerWidths[i].toString() + "%"});
         }
@@ -626,9 +623,9 @@ class CreatePopupFromJSON {
         this.style("." + this.rowClass + ":nth-child(2n+1)", this.oddRowStyle);      
         this.style("." + this.thClass, this.thStyle);
         this.style("." + this.tdClass, this.tdStyle);
-        if ($(this.tableDivId).css("min-height") === "0px") {
-            var currentHeight = $(this.tableDivId).css("height");
-            $(this.tableDivId).css("min-height", currentHeight);
+        if ($("#" + this.tableDivId).css("min-height") === "0px") {
+            var currentHeight = $("#" + this.tableDivId).css("height");
+            $("#" + this.tableDivId).css("min-height", currentHeight);
         }
     }
     
@@ -641,7 +638,7 @@ class CreatePopupFromJSON {
                 "box-sizing": "border-box"
             };
         }
-        $(this.containerId).append('<div id = "' + paginationDivId + '"></div>');
+        $("#" + this.containerId).append('<div id = "' + paginationDivId + '"></div>');
         this.paginationDivId = "#" + paginationDivId;
         this.style(this.paginationDivId, paginationDivStyle);
     }
@@ -756,7 +753,7 @@ class CreatePopupFromJSON {
         if (buttonsDivStyle) {
             this.buttonsDivStyle = buttonsDivStyle;
         }
-        $(this.containerId).append('<div id = "' + this.buttonsDivId + '"></div>');
+        $("#" + this.containerId).append('<div id = "' + this.buttonsDivId + '"></div>');
         this.style("#" + this.buttonsDivId, this.buttonsDivStyle);
     }
     
@@ -792,13 +789,13 @@ class CreatePopupFromJSON {
     
     action_ok(self) {
         console.log('Data received:', self.allData);
-        $(self.containerId).hide();
+        $("#" + self.containerId).hide();
         return self.allData;        
     }
     
     action_cancel(self) {
         console.log("Operation cancelled.");
-        $(self.containerId).hide();
+        $("#" + self.containerId).hide();
     }
     
     sort() {
@@ -1074,7 +1071,7 @@ class CreatePopupFromJSON {
         this.add_buttons_div();
         this.add_buttons();
         this.enable_events();
-    }    
+    }  
 }
 
 /*
